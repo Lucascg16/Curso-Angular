@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { CompomenteGeradoComponent } from './compomente-gerado/compomente-gerado.component';
+import { CDetalhadoComponent } from './c-detalhado/c-detalhado.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
-    CompomenteGeradoComponent
+    CDetalhadoComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
