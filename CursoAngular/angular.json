@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "dataBinding": {
+    "CursoAngular": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/data-binding",
+            "outputPath": "dist/curso-angular",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -64,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "dataBinding:build:production"
+              "buildTarget": "CursoAngular:build:production"
             },
             "development": {
-              "buildTarget": "dataBinding:build:development"
+              "buildTarget": "CursoAngular:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -99,6 +99,6 @@
     }
   },
   "cli": {
-    "analytics": "27468d13-9a93-4d1f-8f9c-a24c9a16e7c8"
+    "analytics": false
   }
 }

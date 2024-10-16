@@ -1,15 +1,13 @@
 import { Component } from '@angular/core';
-import { CDetalhadoComponent } from './c-detalhado/c-detalhado.component';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [
-    CDetalhadoComponent
-  ],
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'primeiro-projeto';
+  title = 'CursoAngular';
 }

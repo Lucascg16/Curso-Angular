@@ -1,5 +1,5 @@
 {
-  "name": "primeiro-projeto",
+  "name": "curso-angular",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:primeiro-projeto": "node dist/primeiro-projeto/server/server.mjs"
+    "serve:ssr:CursoAngular": "node dist/curso-angular/server/server.mjs"
   },
   "private": true,
   "dependencies": {
