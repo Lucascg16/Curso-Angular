@@ -1,0 +1,46 @@
+<section>
+
+    <article>
+        <h3>Interpolação</h3>
+        <p>Para interpolar uma variavel do ts para o html usa-se duas chaves em sequencia: {{url}}</p>
+        <p>1 + 1 = {{1 +1}}</p>
+        <p>Pode ser feito para retornar um metodo tambem {{getValorRamdom()}} </p>
+    </article>
+
+    <article>
+        <h3>Property binding</h3>
+        <img src="{{urlImage}}"><h4>Era para mostrar uma imagem, mas o link está quebrado</h4>
+        <img [src]="urlImage">
+    </article>
+
+    <article>
+        <h3>Class e style binding</h3>
+        <div>Selecione uma classe
+            <select #classe (change)="0">
+                <option value="success">Sucesso</option>
+                <option value="info">info</option>
+                <option value="warning">warning</option>
+                <option value="danger">danger</option>
+            </select>
+            <br><br>
+            <div class="alert alert-{{classe.value}}" role="alert">Esse texto vai ser colorido conforme o select selecionado: {{classe.value}}</div>
+            <br><br>
+            <div class="alert" role="alert" [class.alert-success]="classe.value == 'success'">
+                This is a success alert—check it out!
+              </div>
+              <div class="alert" role="alert" [class.alert-info]="classe.value == 'info'">
+                This is a info alert—check it out!
+              </div>    
+              <div class="alert" role="alert" [class.alert-warning]="classe.value == 'warning'">
+                This is a warning alert—check it out!
+              </div>
+              <div class="alert" role="alert" [class.alert-danger]="classe.value == 'danger'">
+                This is a danger alert—check it out!
+              </div>            
+
+              <div class="alert alert-danger" role="alert" [hidden]="classe.value != 'danger'">
+                Vai aparecer se der erro
+              </div>   
+        </div>
+    </article>
+</section>
