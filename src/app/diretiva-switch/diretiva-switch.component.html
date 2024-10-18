@@ -1,0 +1,20 @@
+<nav class="navbar navbar-expand-lg bg-primary">
+    <div class="nav navbar-nav">
+        <a class="nav-item nav-link" [class.Active]="aba == 'Home'" (click)="aba = 'Home'">Home</a>
+        <a class="nav-item nav-link" [class.Active]="aba == 'Mapa'" (click)="aba = 'Mapa'">Mapa</a>
+        <a class="nav-item nav-link" [class.Active]="aba == 'Lista'" (click)="aba = 'Lista'">Lista</a>
+    </div>
+</nav>
+
+<div class="container"></div>
+@switch (aba) {
+    @case ("Home") {
+        <p>Home da página</p>
+    }
+    @case ("Mapa") {
+        <p>Mostra um mapa aqui</p>
+    }
+    @case ("Lista") {
+        <p>É uma lista de compras que vc quer??</p>
+    }
+}

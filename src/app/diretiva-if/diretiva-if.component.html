@@ -1,0 +1,8 @@
+<h3>NgIf???</h3>
+<h6>A forma que as diretivas são declaradas mudou no angular, agora segue o exemplo abaixo</h6>
+
+@if (cursos.length == 0) {
+    <div [style.fontSize]="tamanhoFonte + 'px'">Lista de cursos</div>
+}
+
+<input type="text" [(ngModel)]="tamanhoFonte">
