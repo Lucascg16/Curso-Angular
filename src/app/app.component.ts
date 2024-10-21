@@ -6,6 +6,7 @@ import { DiretivaIfComponent } from './diretiva-if/diretiva-if.component';
 import { ElvisComponent } from './elvis/elvis.component';
 import { ContentComponent } from './content/content.component';
 import { CustomDirectiveComponent } from './custom-directive/custom-directive.component';
+import { CursosComponent } from './cursos/cursos.component';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,8 @@ import { CustomDirectiveComponent } from './custom-directive/custom-directive.co
     DiretivaIfComponent,
     ElvisComponent,
     ContentComponent,
-    CustomDirectiveComponent
+    CustomDirectiveComponent,
+    CursosComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

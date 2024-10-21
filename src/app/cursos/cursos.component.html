@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="content-wrapper">
+        <p>cursos works!</p>
+    
+        <div>
+            <input type="text" #cursoInput>
+            <button (click)="onAddCurso(cursoInput.value)">Adicionar</button>
+            <button (click)="onSortArray()">Ordenar</button>
+        </div>
+        <div>
+            <h3>Cursos disponiveis</h3>
+        
+            @for (curso of cursos; track $index) {
+                <p>{{curso}}</p>
+            }
+        </div>
+        <app-curso-criado></app-curso-criado>
+    </div>
+</div>
