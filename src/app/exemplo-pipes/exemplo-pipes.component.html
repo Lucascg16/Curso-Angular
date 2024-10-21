@@ -1,0 +1,19 @@
+<div class="container">
+    <h3>Exemplo de Pipes</h3>
+
+    <p>Título: {{ livro.titulo | camelCase  }}</p>
+    <p>Estrelas: {{livro.notaGeral | number: '.1-2' }}</p>
+    <p>Páginas: {{ livro.paginas }} </p>
+    <p>Preço: {{ livro.preco | currency:'BRL' }}</p>
+    <p>Data de Lançamento: {{ livro.lancamento | date:'dd-MMM-yyyy'}}</p>
+    <p>URL: {{ livro.url }}</p>
+    <br>
+    <p>Livro: {{ livro }}</p>
+
+    <input type="text" [(ngModel)]="filtro" placeholder="Filtro">
+    <ul>
+        @for (liv of obterCursos(); track $index) {
+            <li>{{ liv }}</li>
+        }
+    </ul>
+</div>

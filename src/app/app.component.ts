@@ -7,6 +7,8 @@ import { ElvisComponent } from './elvis/elvis.component';
 import { ContentComponent } from './content/content.component';
 import { CustomDirectiveComponent } from './custom-directive/custom-directive.component';
 import { CursosComponent } from './cursos/cursos.component';
+import { ExemploPipesComponent } from './exemplo-pipes/exemplo-pipes.component';
+
 
 @Component({
   selector: 'app-root',
@@ -17,7 +19,8 @@ import { CursosComponent } from './cursos/cursos.component';
     ElvisComponent,
     ContentComponent,
     CustomDirectiveComponent,
-    CursosComponent
+    CursosComponent,
+    ExemploPipesComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
