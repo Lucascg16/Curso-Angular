@@ -6,7 +6,7 @@ import { LogService } from '../shared/log.service';
   providedIn: 'root',
 })
 export class CursosService {
-  private cursos: string[] = ["Angular 2", "Java", "Python", "C#"];
+  private cursos: any[] = [{id: 1, Nome: 'Angular2'}, {id: 2, Nome: 'Java'}];
   emitter = new EventEmitter<string>();
 
   constructor(private _log: LogService) { 
@@ -17,7 +17,11 @@ export class CursosService {
     return this.cursos;
   }
 
-  addCursos(curso: string){
+  getCurso(id: number){
+    return this.cursos.find(x => x.id == id);
+  }
+
+  addCursos(curso: any){
     this._log.Log(`Adicionando ${curso} à lista`)
     this.cursos.push(curso);
     this.emitter.emit(curso);

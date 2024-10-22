@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { UpperCasePipe, DecimalPipe, DatePipe, CurrencyPipe } from '@angular/common';
-import { CamelCasePipe } from '../shared/camel-case.pipe';
+import { CamelCasePipe } from '../../shared/camel-case.pipe';
 import { FormsModule } from '@angular/forms';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-exemplo-pipes',

@@ -1,14 +1,16 @@
-<!-- <app-elvis></app-elvis> -->
-<!-- <app-diretiva-if></app-diretiva-if> -->
-<!-- <app-diretiva-switch></app-diretiva-switch> -->
-<!-- <app-data-binding></app-data-binding> -->
-<!-- <app-content>
-    <div class="titulo">Titulo da aplicação</div>
-
-    <div class="corpo">Descrição do que será feito</div>
-    <div class="corpo">Outra descrição para explicar um pouco melhor sobre</div>
-</app-content> -->
-<!-- <app-custom-directive></app-custom-directive> -->
-<!-- <app-cursos></app-cursos> -->
-
-<app-exemplo-pipes></app-exemplo-pipes>
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+    <a routerLink="/" class="navbar-brand">Rotas</a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="cursos">Cursos</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>

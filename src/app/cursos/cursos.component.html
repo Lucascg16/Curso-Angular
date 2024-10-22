@@ -1,7 +1,6 @@
-<div class="container">
+<div>
+    <br>
     <div class="content-wrapper">
-        <p>cursos works!</p>
-    
         <div>
             <input type="text" #cursoInput>
             <button (click)="onAddCurso(cursoInput.value)">Adicionar</button>
@@ -10,9 +9,12 @@
         <div>
             <h3>Cursos disponiveis</h3>
         
-            @for (curso of cursos; track $index) {
-                <p>{{curso}}</p>
-            }
+            <ul class="list-group">
+                @for (curso of cursos; track $index) {
+                   <li class="list-group-item" [routerLink]="['/curso', curso.id]">{{ curso.Nome }}</li>
+                }
+    
+            </ul>
         </div>
         <app-curso-criado></app-curso-criado>
     </div>
