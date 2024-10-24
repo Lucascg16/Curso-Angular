@@ -13,7 +13,7 @@ export class CursosService {
   }
 
   getCursos(){
-    this._log.Log("Obtento a lista de cursos")
+    this._log.Log("Obtendo a lista de cursos")
     return this.cursos;
   }
 

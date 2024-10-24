@@ -8,7 +8,7 @@
         </div>
         <div>
             <h3>Cursos disponiveis</h3>
-        
+            <button (click)="onAntPag()"><<</button><span>Pagina: {{ pagina }} </span><button (click)="OnproxPag()">>></button>
             <ul class="list-group">
                 @for (curso of cursos; track $index) {
                    <li class="list-group-item" [routerLink]="['/curso', curso.id]">{{ curso.Nome }}</li>
