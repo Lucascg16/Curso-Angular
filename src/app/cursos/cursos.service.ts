@@ -6,7 +6,7 @@ import { LogService } from '../shared/log.service';
   providedIn: 'root',
 })
 export class CursosService {
-  private cursos: any[] = [{id: 1, Nome: 'Angular2'}, {id: 2, Nome: 'Java'}];
+  private cursos = [{id: 1, Nome: 'Angular2'}, {id: 2, Nome: 'Java'}];
   emitter = new EventEmitter<string>();
 
   constructor(private _log: LogService) { 

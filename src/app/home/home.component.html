@@ -1,1 +1,28 @@
-<p>home works!</p>
+<div class="home-container">
+    <!-- Seção de Boas-vindas -->
+    <header class="welcome-section">
+      <h1>Bem-vindo ao Nosso Site!</h1>
+      <p>Explore as novidades e descubra mais sobre o que oferecemos.</p>
+      <button class="explore-btn" (click)="explore()">Explorar Agora</button>
+    </header>
+  
+    <!-- Navegação rápida -->
+    <nav class="quick-nav">
+      <button class="nav-btn" routerLink="/about">Sobre Nós</button>
+      <button class="nav-btn" routerLink="/services">Serviços</button>
+      <button class="nav-btn" routerLink="/contact">Contato</button>
+    </nav>
+  
+    <!-- Galeria de Cards -->
+    <section class="card-gallery">
+        @for (item of items; track $index) {
+            <div>
+                <img [src]="item.imageUrl" alt="{{item.title}}" class="card-image" />
+                <h3 class="card-title">{{ item.title }}</h3>
+                <p class="card-description">{{ item.description }}</p>
+                <button class="card-btn" (click)="viewDetails(item)">Saiba Mais</button>
+              </div>        
+        }
+    </section>
+  </div>
+  
