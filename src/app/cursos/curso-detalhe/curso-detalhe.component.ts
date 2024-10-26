@@ -17,20 +17,18 @@ export class CursoDetalheComponent {
   curso: any;
 
   constructor(private _route:ActivatedRoute, private _service: CursosService, private _router: Router){
-  }
-
-  ngOnInit(){
     this.inscricao = this._route.params.subscribe(
       (params: any) => { 
         this.id = params['id']; 
         this.curso = this._service.getCurso(this.id);
 
         if(this.curso == undefined){
-          this._router.navigate([`/erroCurso/${this.id}`]);
+          this._router.navigate([`/erro/${this.id}`]);
         }
       }
     );
   }
+  
   ngOnDestroy(){
     this.inscricao.unsubscribe();
   }

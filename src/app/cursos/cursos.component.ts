@@ -29,13 +29,13 @@ export class CursosComponent {
 
   onAntPag(){
     if(this.pagina > 1){
-      this._router.navigate(['/cursos]', {
+      this._router.navigate(['/curso]', {
         queryParams: { 'pagina': --this.pagina}}
       ]);
     }
   }
   OnproxPag(){
-    this._router.navigate(['/cursos'], {
+    this._router.navigate(['/curso'], {
       queryParams: {'pagina': ++this.pagina}
     })
   }

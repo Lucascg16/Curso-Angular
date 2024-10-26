@@ -1,2 +1,24 @@
-<p>alunos works!</p>
-<router-outlet></router-outlet>
+
+<div class="row">
+    <div class="col-sm">
+        <p>Lista de alunos</p>
+        <table class="table">
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Nome</th>
+                <th scope="col">Email</th>
+            </tr>
+            @for (aluno of alunos; track $index) {
+                <tr [routerLink]="[aluno.id]"> 
+                    <th scope="row"></th>
+                    <th class="">{{ aluno.nome }}</th>
+                    <th class="">{{ aluno.email }}</th>
+                </tr>        
+            }
+        </table>
+    </div>
+    <div class="col-sm">
+        <router-outlet></router-outlet>
+    </div>
+</div>
+
