@@ -5,8 +5,8 @@ import { LoginComponent } from './login/login.component';
 
 
 export const routes: Routes = [
-    {path: '', component: HomeComponent},
-    {path: 'login', component: LoginComponent},
+    {path: 'home', component: HomeComponent},
+    {path: '', component: LoginComponent},
     {path: 'curso', loadChildren: () => import('./cursos/cursos.routes').then(r => r.CursoRoutes)},
     {path: 'aluno', loadChildren: () => import('./alunos/alunos.routes').then(r => r.alunosRoutes)}
 ];

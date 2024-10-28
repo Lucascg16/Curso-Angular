@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { RouterOutlet, RouterLink } from '@angular/router';
-import {  } from '@angular/material';
+import { RouterOutlet, RouterLink, Router } from '@angular/router';
+
+import { AuthService } from './login/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -11,4 +12,16 @@ import {  } from '@angular/material';
 })
 export class AppComponent {
   title = 'CursoAngular';
+
+  mostrarMenu: boolean = false;
+
+  constructor(private authService: AuthService, private router: Router){
+    this.authService.authEmitter.subscribe(
+      (auth) => this.mostrarMenu = auth
+    );
+
+    if(!this.mostrarMenu){
+      this.router.navigate(['/']);
+    }
+  }
 }
