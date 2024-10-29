@@ -19,9 +19,5 @@ export class AppComponent {
     this.authService.authEmitter.subscribe(
       (auth) => this.mostrarMenu = auth
     );
-
-    if(!this.mostrarMenu){
-      this.router.navigate(['/']);
-    }
   }
 }

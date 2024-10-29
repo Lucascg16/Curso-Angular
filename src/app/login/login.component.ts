@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from './auth.service';
-import { Usuario } from './usuario';
+import { Usuario } from '../Model/usuario';
 import { FormsModule } from '@angular/forms';
 
 @Component({

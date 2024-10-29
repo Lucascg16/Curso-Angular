@@ -1,26 +1,30 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AlunoService } from '../aluno.service';
+import { Aluno } from '../../Model/aluno';
 
 @Component({
   selector: 'app-aluno-detalhe',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './aluno-detalhe.component.html',
   styleUrl: './aluno-detalhe.component.css'
 })
 export class AlunoDetalheComponent {
-  aluno: any;
-  constructor(private route: ActivatedRoute, private _service: AlunoService){
-    route.params.subscribe(
-      (param:any) => {
-        let id = param['id'];
-        this.aluno = _service.getAluno(id);
+  aluno: Aluno = new Aluno();
+  constructor(private route: ActivatedRoute, private _service: AlunoService, private _router:Router){
+    this.route.data.subscribe(
+      (info) => {
+        this.aluno = info['aluno'];
       }
     );
   }
 
   ngOndestroy(){
-   this.route.params.subscribe().unsubscribe(); 
+    this.route.params.subscribe().unsubscribe(); 
+  }
+
+  Editar(){
+    this._router.navigate([`aluno/${this.aluno.id}/editar`]);
   }
 }
