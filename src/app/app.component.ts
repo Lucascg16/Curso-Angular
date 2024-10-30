@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet, RouterLink, Router } from '@angular/router';
-
-import { AuthService } from './login/auth.service';
+import { RouterOutlet, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -13,11 +11,5 @@ import { AuthService } from './login/auth.service';
 export class AppComponent {
   title = 'CursoAngular';
 
-  mostrarMenu: boolean = false;
-
-  constructor(private authService: AuthService, private router: Router){
-    this.authService.authEmitter.subscribe(
-      (auth) => this.mostrarMenu = auth
-    );
-  }
+  constructor(){}
 }
