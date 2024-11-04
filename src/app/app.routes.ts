@@ -2,8 +2,8 @@ import { Routes } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
 import { PaginaErroComponent } from './pagina-erro/pagina-erro.component';
-import { TemplateDrivenComponent } from './template-driven/template-driven.component';
-import { DataDrivenComponent } from './data-driven/data-driven.component';
+import { DataDrivenComponent } from './Formularios/data-driven/data-driven.component';
+import { TemplateDrivenComponent } from './Formularios/template-driven/template-driven.component';
 
 
 export const routes: Routes = [

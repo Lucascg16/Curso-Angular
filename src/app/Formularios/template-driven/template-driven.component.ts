@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { FormDebugComponent } from '../form-debug/form-debug.component';
 import { HttpClient } from '@angular/common/http';
+import { FormDebugComponent } from '../form-debug/form-debug.component';
 
 @Component({
   selector: 'app-template-driven',
