@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { FundoAmareloDirective } from '../../shared/fundo-amarelo.directive';
-import { OverMouseHLDirective } from '../../shared/over-mouse-hl.directive';
-import { HighlightDirective } from '../../shared/highlight.directive';
+import { FundoAmareloDirective } from '../../shared/diretivas/fundo-amarelo.directive';
+import { OverMouseHLDirective } from '../../shared/diretivas/over-mouse-hl.directive';
+import { HighlightDirective } from '../../shared/diretivas/highlight.directive';
 
 @Component({
   selector: 'app-custom-directive',

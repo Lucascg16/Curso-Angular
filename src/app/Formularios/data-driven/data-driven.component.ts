@@ -1,23 +1,31 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormDebugComponent } from '../form-debug/form-debug.component';
 import { HttpClient } from '@angular/common/http';
+import { DropDownService } from '../drop-down.service';
+import { estados } from '../../Model/estados';
+import { ConsultaCepService } from '../../shared/services/consulta-cep.service';
+import { AsyncPipe } from '@angular/common';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-data-driven',
   standalone: true,
-  imports: [ReactiveFormsModule, FormDebugComponent],
+  imports: [ReactiveFormsModule, FormDebugComponent, AsyncPipe],
   templateUrl: './data-driven.component.html',
   styleUrl: './data-driven.component.css'
 })
 export class DataDrivenComponent {
   form: FormGroup;
+  estados: Observable<estados[]>;
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) {
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private _dropServices: DropDownService, private _cepService: ConsultaCepService) {
     // this.form = new FormGroup({
     //   nome: new FormControl(null),
     //   email: new FormControl(null)
     // });
+
+    this.estados = this._dropServices.getEstados();
 
     this.form = this.formBuilder.group({
       nome: [null, Validators.required],
@@ -36,11 +44,27 @@ export class DataDrivenComponent {
   }
 
   onSub() {
-    console.log(this.form.value);
+    if (this.form.invalid) {
+      this.verificaValidacoesForm(this.form)
+      return;
+    }
+
     this.http.post('https://httpbin.org/post', JSON.stringify(this.form.value)).subscribe(response => {
       console.log(response);
       this.resetFormSubmit();
     });
+  }
+
+  verificaValidacoesForm(form: FormGroup) {
+    Object.keys(form.controls).forEach(campo => {
+      console.log(campo);
+      const controle = form.get(campo);
+      controle?.markAsTouched();
+
+      if (controle instanceof FormGroup) {
+        this.verificaValidacoesForm(controle);
+      }
+    })
   }
 
   resetFormSubmit() {
@@ -50,16 +74,8 @@ export class DataDrivenComponent {
   consultaCep() {
     let cep: string = this.form.get('endereco.cep')?.value;
 
-    cep = cep.replace(/\D/g, '');
-    if (cep != "") {
-      var validaCep = /^[0-9]{8}$/;
-
-      if (validaCep.test(cep)) {
-        this.resetFormData()
-        this.http.get(`//viacep.com.br/ws/${cep}/json`).subscribe(
-          (data) => this.populaForm(data)
-        );
-      }
+    if (cep != null && cep !== '') {
+      this._cepService.consultaCep(cep).subscribe(dados => this.populaForm(dados));
     }
   }
 

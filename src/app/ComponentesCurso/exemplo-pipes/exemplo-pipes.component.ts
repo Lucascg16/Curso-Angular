@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { UpperCasePipe, DecimalPipe, DatePipe, CurrencyPipe } from '@angular/common';
-import { CamelCasePipe } from '../../shared/camel-case.pipe';
+import { CamelCasePipe } from '../../shared/pipes/camel-case.pipe';
 import { FormsModule } from '@angular/forms';
 
 @Component({
