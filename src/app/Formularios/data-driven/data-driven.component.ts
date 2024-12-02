@@ -18,6 +18,9 @@ import { Observable } from 'rxjs';
 export class DataDrivenComponent {
   form: FormGroup;
   estados: Observable<estados[]>;
+  cargos: any[];
+  tech: any[];
+  newsOp: any[];
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private _dropServices: DropDownService, private _cepService: ConsultaCepService) {
     // this.form = new FormGroup({
@@ -26,6 +29,9 @@ export class DataDrivenComponent {
     // });
 
     this.estados = this._dropServices.getEstados();
+    this.cargos = this._dropServices.getCargos();
+    this.tech = this._dropServices.getTech();
+    this.newsOp = this._dropServices.getNews();
 
     this.form = this.formBuilder.group({
       nome: [null, Validators.required],
@@ -39,7 +45,10 @@ export class DataDrivenComponent {
         bairro: [null],
         cidade: [null],
         estado: [null]
-      })
+      }),
+      cargo: [null],
+      tech: [null],
+      newsLetter: ['n']
     });
   }
 
@@ -121,5 +130,14 @@ export class DataDrivenComponent {
       'has-error': this.verificaValidTouched(campo),
       'has-feedback': this.verificaValidTouched(campo)
     };
+  }
+  
+  setCargo() {
+    const cargo = { nome: 'Dev', nivel: 'Pl', desc: 'Dev Pl' };
+    this.form.get('cargo')?.setValue(cargo);
+  }
+
+  comparaCargos(obj1: any, obj2: any){
+    return obj1 & obj2 ? (obj1.nome === obj2.nome && obj1.nivel === obj2.nivel) : obj1 === obj2;
   }
 }
