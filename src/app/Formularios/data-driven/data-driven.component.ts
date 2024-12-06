@@ -5,13 +5,13 @@ import { HttpClient } from '@angular/common/http';
 import { DropDownService } from '../drop-down.service';
 import { estados } from '../../Model/estados';
 import { ConsultaCepService } from '../../shared/services/consulta-cep.service';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, NgClass } from '@angular/common';
 import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-data-driven',
   standalone: true,
-  imports: [ReactiveFormsModule, FormDebugComponent, AsyncPipe],
+  imports: [ReactiveFormsModule, FormDebugComponent, AsyncPipe, NgClass],
   templateUrl: './data-driven.component.html',
   styleUrl: './data-driven.component.css'
 })
@@ -48,7 +48,8 @@ export class DataDrivenComponent {
       }),
       cargo: [null],
       tech: [null],
-      newsLetter: ['n']
+      newsLetter: ['n'],
+      termo: [false, Validators.pattern('true')]
     });
   }
 

@@ -86,11 +86,21 @@
                 @for (news of newsOp; track $index) {
                 <div class="col-sm-4">
                     <label class="radio-inline">
-                        <input type="radio" formControlName="newsLetter" [value]="news.valor"/> {{news.desc}}
+                        <input type="radio" formControlName="newsLetter" [value]="news.valor" /> {{news.desc}}
                     </label>
                 </div>
                 }
             </div>
+        </div>
+        <div class="form-group col-md-3">
+            <div class="checkbox">
+                <label class="checkbox-inline">
+                    <input type="checkbox" formControlName="termo">Aceito os termos
+                </label>
+            </div>
+            @if(!form.get('termo')?.valid){
+            <span class="form-text text-danger">Por favor aceite os termos</span>
+            }
         </div>
     </div>
 
