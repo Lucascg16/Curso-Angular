@@ -2,10 +2,9 @@
     <div class="form-group">
         <label for="nome" class="form-text">Nome</label>
         <input type="text" formControlName="nome" id="nome" class="form-control">
-        @if(verificaValidTouched('nome')){
-        <span class="form-text text-danger">Nome é obrigatório</span>
-        }
+        <app-error-msg [control]="form.get('nome')"  label="Nome"></app-error-msg>
     </div>
+
     <div class="form-group">
         <label for="email" class="form-text">Email</label>
         <input type="email" formControlName="email" id="email" class="form-control" placeholder="mail@email.com">

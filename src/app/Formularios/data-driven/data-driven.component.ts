@@ -7,11 +7,12 @@ import { estados } from '../../Model/estados';
 import { ConsultaCepService } from '../../shared/services/consulta-cep.service';
 import { AsyncPipe, NgClass } from '@angular/common';
 import { Observable } from 'rxjs';
+import { ErrorMsgComponent } from "../shared/error-msg/error-msg.component";
 
 @Component({
   selector: 'app-data-driven',
   standalone: true,
-  imports: [ReactiveFormsModule, FormDebugComponent, AsyncPipe, NgClass],
+  imports: [ReactiveFormsModule, FormDebugComponent, AsyncPipe, ErrorMsgComponent],
   templateUrl: './data-driven.component.html',
   styleUrl: './data-driven.component.css'
 })
@@ -34,7 +35,7 @@ export class DataDrivenComponent {
     this.newsOp = this._dropServices.getNews();
 
     this.form = this.formBuilder.group({
-      nome: [null, Validators.required],
+      nome: [null, [Validators.required]],
       email: [null, [Validators.email, Validators.required]],
 
       endereco: this.formBuilder.group({
