@@ -55,12 +55,7 @@ export class DataDrivenComponent{
       termo: [false, Validators.pattern('true')]
     });
 
-    this.form.get('endereco.cep')?.statusChanges
-    .pipe(
-      distinctUntilChanged(),
-      tap()
-    )
-    .subscribe(status =>{
+    this.form.get('endereco.cep')?.statusChanges.pipe(distinctUntilChanged(), tap()).subscribe(status =>{
       if(status === "VALID"){
         this._cepService.consultaCep(this.form.get('endereco.cep')?.value).subscribe(dados => this.populaForm(dados));
       }
@@ -93,13 +88,6 @@ export class DataDrivenComponent{
 
   resetFormSubmit() {
     this.form.reset();
-  }
-
-  consultaCep() {
-    let cep: string = this.form.get('endereco.cep')?.value;
-
-    if (cep != null && cep !== '') {
-    }
   }
 
   populaForm(data: any) {
