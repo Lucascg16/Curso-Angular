@@ -1,9 +1,5 @@
 <form [formGroup]="form" (ngSubmit)="onSub()">
-    <div class="form-group">
-        <label for="nome" class="form-text">Nome</label>
-        <input type="text" formControlName="nome" id="nome" class="form-control">
-        <app-error-msg [control]="form.get('nome')"  label="Nome"></app-error-msg>
-    </div>
+    <app-input-field formControlName="nome" id="nome" label="Nome" [control]="form.get('nome')"></app-input-field>
 
     <div class="form-group">
         <label for="email" class="form-text">Email</label>
@@ -17,7 +13,7 @@
         <div class="row">
             <div class="form-group col-sm-3">
                 <label for="cep" class="form-text">CEP</label>
-                <input type="text" id="cep" formControlName="cep" class="form-control" (blur)="consultaCep()">
+                <input type="text" id="cep" formControlName="cep" class="form-control">
                 @if(verificaValidTouched('endereco.cep')){
                 <span class="form-text text-danger">O CEP é obrigatório</span>
                 }

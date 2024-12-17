@@ -5,18 +5,20 @@ import { HttpClient } from '@angular/common/http';
 import { DropDownService } from '../drop-down.service';
 import { estados } from '../../Model/estados';
 import { ConsultaCepService } from '../../shared/services/consulta-cep.service';
-import { AsyncPipe, NgClass } from '@angular/common';
-import { Observable } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
+import { distinctUntilChanged, Observable, tap } from 'rxjs';
 import { ErrorMsgComponent } from "../shared/error-msg/error-msg.component";
+import { FormValidations } from '../shared/form-validator';
+import { InputFieldComponent } from '../shared/input-field/input-field.component';
 
 @Component({
   selector: 'app-data-driven',
   standalone: true,
-  imports: [ReactiveFormsModule, FormDebugComponent, AsyncPipe, ErrorMsgComponent],
+  imports: [ReactiveFormsModule, FormDebugComponent, AsyncPipe, ErrorMsgComponent, InputFieldComponent],
   templateUrl: './data-driven.component.html',
   styleUrl: './data-driven.component.css'
 })
-export class DataDrivenComponent {
+export class DataDrivenComponent{
   form: FormGroup;
   estados: Observable<estados[]>;
   cargos: any[];
@@ -39,7 +41,7 @@ export class DataDrivenComponent {
       email: [null, [Validators.email, Validators.required]],
 
       endereco: this.formBuilder.group({
-        cep: [null, Validators.required],
+        cep: [null, [Validators.required, FormValidations.cepValidator]],
         numero: [null, Validators.required],
         complemento: [null],
         rua: [null, Validators.required],
@@ -51,6 +53,17 @@ export class DataDrivenComponent {
       tech: [null],
       newsLetter: ['n'],
       termo: [false, Validators.pattern('true')]
+    });
+
+    this.form.get('endereco.cep')?.statusChanges
+    .pipe(
+      distinctUntilChanged(),
+      tap()
+    )
+    .subscribe(status =>{
+      if(status === "VALID"){
+        this._cepService.consultaCep(this.form.get('endereco.cep')?.value).subscribe(dados => this.populaForm(dados));
+      }
     });
   }
 
@@ -86,7 +99,6 @@ export class DataDrivenComponent {
     let cep: string = this.form.get('endereco.cep')?.value;
 
     if (cep != null && cep !== '') {
-      this._cepService.consultaCep(cep).subscribe(dados => this.populaForm(dados));
     }
   }
 

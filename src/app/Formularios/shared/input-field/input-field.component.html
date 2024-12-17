@@ -1,0 +1,5 @@
+<div class="form-group">
+    <label [attr.for]="id" class="form-text">{{ label }}</label>
+    <input [type]="type" [id]="id" class="form-control" [readOnly]="!!isReadOnly" [(ngModel)]="value">
+    <app-error-msg [control]="control"  [label]="label"></app-error-msg>
+</div>
