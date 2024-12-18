@@ -7,19 +7,18 @@ import { estados } from '../../Model/estados';
 import { ConsultaCepService } from '../../shared/services/consulta-cep.service';
 import { AsyncPipe } from '@angular/common';
 import { distinctUntilChanged, Observable, tap } from 'rxjs';
-import { ErrorMsgComponent } from "../shared/error-msg/error-msg.component";
 import { FormValidations } from '../shared/form-validator';
 import { InputFieldComponent } from '../shared/input-field/input-field.component';
+import { BaseFormComponent } from '../shared/base-form/base-form.component';
 
 @Component({
   selector: 'app-data-driven',
   standalone: true,
-  imports: [ReactiveFormsModule, FormDebugComponent, AsyncPipe, ErrorMsgComponent, InputFieldComponent],
+  imports: [ReactiveFormsModule, FormDebugComponent, AsyncPipe, InputFieldComponent],
   templateUrl: './data-driven.component.html',
   styleUrl: './data-driven.component.css'
 })
-export class DataDrivenComponent{
-  form: FormGroup;
+export class DataDrivenComponent extends BaseFormComponent{
   estados: Observable<estados[]>;
   cargos: any[];
   tech: any[];
@@ -30,6 +29,7 @@ export class DataDrivenComponent{
     //   nome: new FormControl(null),
     //   email: new FormControl(null)
     // });
+    super();
 
     this.estados = this._dropServices.getEstados();
     this.cargos = this._dropServices.getCargos();
@@ -62,38 +62,17 @@ export class DataDrivenComponent{
     });
   }
 
-  onSub() {
-    if (this.form.invalid) {
-      this.verificaValidacoesForm(this.form)
-      return;
-    }
-
+  override submit() {
     this.http.post('https://httpbin.org/post', JSON.stringify(this.form.value)).subscribe(response => {
       console.log(response);
       this.resetFormSubmit();
-    });
-  }
-
-  verificaValidacoesForm(form: FormGroup) {
-    Object.keys(form.controls).forEach(campo => {
-      console.log(campo);
-      const controle = form.get(campo);
-      controle?.markAsTouched();
-
-      if (controle instanceof FormGroup) {
-        this.verificaValidacoesForm(controle);
-      }
-    })
-  }
-
-  resetFormSubmit() {
-    this.form.reset();
+    });  
   }
 
   populaForm(data: any) {
     this.form.patchValue({
       endereco: {
-        cep: data.cep,
+        //cep: data.cep,
         complemento: data.complemento,
         rua: data.logradouro,
         bairro: data.bairro,
@@ -116,24 +95,6 @@ export class DataDrivenComponent{
     });
   }
 
-  verificaValidTouched(campo: string) {
-    return !this.form.get(campo)?.valid && this.form.get(campo)?.touched;
-  }
-
-  verificaEmailValido() {
-    let campoEmail = this.form.get('email');
-    if (campoEmail?.errors) {
-      return campoEmail.errors['email'] && campoEmail.touched;
-    }
-  }
-
-  aplicaCssErro(campo: string) {
-    return {
-      'has-error': this.verificaValidTouched(campo),
-      'has-feedback': this.verificaValidTouched(campo)
-    };
-  }
-  
   setCargo() {
     const cargo = { nome: 'Dev', nivel: 'Pl', desc: 'Dev Pl' };
     this.form.get('cargo')?.setValue(cargo);

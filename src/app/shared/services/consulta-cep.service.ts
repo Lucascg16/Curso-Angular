@@ -10,7 +10,7 @@ export class ConsultaCepService {
   constructor(private _http: HttpClient) { }
 
   consultaCep(cep: string) {
-    cep = cep.replace(/\D/g, '');
+    cep = cep.replace(/\D/g, '').replace('-', '');
     if (cep !== "") {
       var validaCep = /^[0-9]{8}$/;
 
