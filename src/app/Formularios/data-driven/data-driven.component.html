@@ -1,23 +1,34 @@
 <form [formGroup]="form" (ngSubmit)="onSub()">
     <app-input-field formControlName="nome" id="nome" label="Nome" [control]="form.get('nome')"></app-input-field>
-    <app-input-field formControlName="email" id="email" type="email" label="Email" [control]="form.get('email')"></app-input-field>
+    <app-input-field formControlName="email" id="email" type="email" label="Email"
+        [control]="form.get('email')"></app-input-field>
 
     <div formGroupName="endereco">
         <div class="row">
-            <app-input-field class="col-md-3" formControlName="cep" id="cep" label="CEP" [control]="form.get('endereco.cep')"></app-input-field>
-            <app-input-field class="col-md-3" formControlName="numero" id="numero" label="Número" [control]="form.get('endereco.numero')"></app-input-field>
-            <app-input-field class="col-md-6" formControlName="complemento" id="complemento" label="Complemento"></app-input-field>
+            <app-input-field class="col-md-3" formControlName="cep" id="cep" label="CEP"
+                [control]="form.get('endereco.cep')"></app-input-field>
+            <app-input-field class="col-md-3" formControlName="numero" id="numero" label="Número"
+                [control]="form.get('endereco.numero')"></app-input-field>
+            <app-input-field class="col-md-6" formControlName="complemento" id="complemento"
+                label="Complemento"></app-input-field>
         </div>
-        <app-input-field class="col-md-3" formControlName="rua" id="rua" label="Rua" [control]="form.get('endereco.rua')"></app-input-field>
+        <app-input-field class="col-md-3" formControlName="rua" id="rua" label="Rua"
+            [control]="form.get('endereco.rua')"></app-input-field>
 
         <div class="row">
             <app-input-field class="col-md-5" formControlName="bairro" id="bairro" label="Bairro"></app-input-field>
-            <app-input-field class="col-md-5" formControlName="cidade" id="cidade" label="Cidade"></app-input-field>
-
+            <div class="form-group col-sm-5">
+                <label for="cidade" class="form-text">Cidade</label>
+                <select id="cidade" formControlName="cidade" class="form-select">
+                    @for (cidade of cidades; track $index) {
+                    <option [value]="cidade.ID">{{ cidade.Nome }}</option>
+                    }
+                </select>
+            </div>
             <div class="form-group col-sm-2">
                 <label for="estado" class="form-text">Estado</label>
                 <select id="estado" formControlName="estado" class="form-select">
-                    @for (estado of (estados | async); track $index) {
+                    @for (estado of estados; track $index) {
                     <option [value]="estado.Sigla">{{ estado.Nome }}</option>
                     }
                 </select>

@@ -1,25 +1,26 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormDebugComponent } from '../form-debug/form-debug.component';
 import { HttpClient } from '@angular/common/http';
 import { DropDownService } from '../drop-down.service';
 import { estados } from '../../Model/estados';
 import { ConsultaCepService } from '../../shared/services/consulta-cep.service';
-import { AsyncPipe } from '@angular/common';
-import { distinctUntilChanged, Observable, tap } from 'rxjs';
+import { distinctUntilChanged, empty, map, switchMap, tap } from 'rxjs';
 import { FormValidations } from '../shared/form-validator';
 import { InputFieldComponent } from '../shared/input-field/input-field.component';
 import { BaseFormComponent } from '../shared/base-form/base-form.component';
+import { cidade } from '../../Model/cidade';
 
 @Component({
   selector: 'app-data-driven',
   standalone: true,
-  imports: [ReactiveFormsModule, FormDebugComponent, AsyncPipe, InputFieldComponent],
+  imports: [ReactiveFormsModule, FormDebugComponent, InputFieldComponent],
   templateUrl: './data-driven.component.html',
   styleUrl: './data-driven.component.css'
 })
-export class DataDrivenComponent extends BaseFormComponent{
-  estados: Observable<estados[]>;
+export class DataDrivenComponent extends BaseFormComponent {
+  estados: estados[];
+  cidades: cidade[] = [];
   cargos: any[];
   tech: any[];
   newsOp: any[];
@@ -31,7 +32,12 @@ export class DataDrivenComponent extends BaseFormComponent{
     // });
     super();
 
-    this.estados = this._dropServices.getEstados();
+    this._dropServices.getEstados().subscribe(dados => this.estados = dados);
+    this.cidades = [{
+      ID: 0,
+      Nome: "Por favor, selecione um estado",
+      Estado: 0
+    }]
     this.cargos = this._dropServices.getCargos();
     this.tech = this._dropServices.getTech();
     this.newsOp = this._dropServices.getNews();
@@ -55,18 +61,25 @@ export class DataDrivenComponent extends BaseFormComponent{
       termo: [false, Validators.pattern('true')]
     });
 
-    this.form.get('endereco.cep')?.statusChanges.pipe(distinctUntilChanged(), tap()).subscribe(status =>{
-      if(status === "VALID"){
+    this.form.get('endereco.cep')?.statusChanges.pipe(distinctUntilChanged(), tap()).subscribe(status => {
+      if (status === "VALID") {
         this._cepService.consultaCep(this.form.get('endereco.cep')?.value).subscribe(dados => this.populaForm(dados));
       }
     });
+
+    this.form.get('endereco.estado')?.valueChanges.pipe(
+      //tap(estado => console.log(estado)),
+      map(estado => this.estados.filter(e => e.Sigla === estado)),
+      map(estados => estados && estados.length > 0 ? estados[0].ID : 0),
+      switchMap((estadoId: number) => this._dropServices.getCidades(estadoId)),
+    ).subscribe(cidades => this.cidades = cidades);
   }
 
   override submit() {
     this.http.post('https://httpbin.org/post', JSON.stringify(this.form.value)).subscribe(response => {
       console.log(response);
       this.resetFormSubmit();
-    });  
+    });
   }
 
   populaForm(data: any) {
@@ -100,7 +113,7 @@ export class DataDrivenComponent extends BaseFormComponent{
     this.form.get('cargo')?.setValue(cargo);
   }
 
-  comparaCargos(obj1: any, obj2: any){
+  comparaCargos(obj1: any, obj2: any) {
     return obj1 & obj2 ? (obj1.nome === obj2.nome && obj1.nivel === obj2.nivel) : obj1 === obj2;
   }
 }
